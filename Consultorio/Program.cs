@@ -1,4 +1,6 @@
-using Consultorio.Services.EmailService;
+
+using Consultorio.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors();
 builder.Services.AddControllers();
 
+#region DbContext
+builder.Services.AddDbContext<ConsultorioContext>(opt => opt.UseSqlServer(
+    builder.Configuration.GetConnectionString("SqlServerConnection")
+));
+#endregion
+
 #region Adding services/interfaces
-builder.Services.AddScoped<IEmailService, EmailService>();
+//builder.Services.AddScoped<IEmailService, EmailService>();
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
