@@ -11,7 +11,7 @@ namespace Consultorio.Context.MappingFluentAPI
         {
             _tableName = tableName;
         }
-        public void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configure(EntityTypeBuilder<T> builder)
         {
 
             // all that is inside of this classe will be applied to any derived class

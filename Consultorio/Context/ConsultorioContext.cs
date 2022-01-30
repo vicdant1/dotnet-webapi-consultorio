@@ -10,9 +10,9 @@ namespace Consultorio.Context
         {}
 
         public DbSet<Consulta> Consultas { get; set; }
-        public DbSet<Especialidade> Especialidades { get; set; }
-        public DbSet<Paciente> Pacientes { get; set; }
-        public DbSet<Profissional> Profissionais { get; set; }
+        //public DbSet<Especialidade> Especialidades { get; set; }
+        //public DbSet<Paciente> Pacientes { get; set; }
+        //public DbSet<Profissional> Profissionais { get; set; }
 
         //public DbSet<ProfissionalEspecialidade> ProfissionaisEspecialidades { get; set; }
         //public DbSet<Agendamento> Agendamentos { get; set; }
