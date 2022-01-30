@@ -1,11 +1,10 @@
 ﻿namespace Consultorio.Models.Entities
 {
-    public class Especialidade
+    public class Especialidade : Base
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
         public bool Ativa { get; set; }
-        public List<Profissional> Profissionais { get; set; }
-        public List<Consulta> Consultas { get; set; }
+        //public List<Profissional> Profissionais { get; set; }
+        //public List<Consulta> Consultas { get; set; }
     }
 }

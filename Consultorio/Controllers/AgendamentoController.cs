@@ -1,5 +1,4 @@
-﻿using Consultorio.Models.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Consultorio.Controllers
 {
