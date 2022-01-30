@@ -19,6 +19,8 @@ namespace Consultorio.Context.MappingFluentAPI
             builder.Property(p => p.Email).HasColumnName("email").HasColumnType("varchar(50)");
             builder.Property(p => p.Celular).HasColumnName("celular").HasColumnType("varchar(100)").IsRequired();
 
+
+
         }
     }
 }

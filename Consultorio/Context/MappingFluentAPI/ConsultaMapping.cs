@@ -21,6 +21,10 @@ namespace Consultorio.Context.MappingFluentAPI
             builder.Property(c => c.Status).HasColumnName("status").HasDefaultValue(1);
             builder.Property(c => c.Preco).HasColumnType("decimal(8,2)").HasColumnName("preco");
             builder.Property(c => c.DataHorario).HasColumnName("data_horario").IsRequired();
+
+            builder.Property(c => c.PacienteId).HasColumnName("id_paciente").IsRequired();
+            builder.HasOne(c => c.Paciente).WithMany(c => c.Consultas).HasForeignKey(c => c.PacienteId);
+
         }
     }
 }
