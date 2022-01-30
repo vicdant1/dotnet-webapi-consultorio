@@ -14,8 +14,12 @@ namespace Consultorio.Context.MappingFluentAPI
 
         public override void Configure(EntityTypeBuilder<Consulta> builder)
         {
+            // never remove this, it is NOT default.
+
+            base.Configure(builder);
+
             builder.Property(c => c.Status).HasColumnName("status").HasDefaultValue(1);
-            builder.Property(c => c.Preco).HasColumnType("decimal(7,2)").HasColumnName("preco");
+            builder.Property(c => c.Preco).HasColumnType("decimal(8,2)").HasColumnName("preco");
             builder.Property(c => c.DataHorario).HasColumnName("data_horario").IsRequired();
         }
     }
