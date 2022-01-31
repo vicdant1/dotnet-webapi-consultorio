@@ -12,7 +12,7 @@
         public Profissional Profissional { get; set; } = new ();
         public int ProfissionalId { get; set; }
 
-        //public int EspecialidadeId { get; set; }
-        //public Especialidade Especialidade { get; set; }
+        public Especialidade Especialidade { get; set; } = new();
+        public int EspecialidadeId { get; set; }
     }
 }

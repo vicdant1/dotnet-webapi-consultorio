@@ -28,7 +28,8 @@ namespace Consultorio.Context.MappingFluentAPI
             builder.Property(c => c.ProfissionalId).HasColumnName("id_profissional").IsRequired();
             builder.HasOne(c => c.Profissional).WithMany(c => c.Consultas).HasForeignKey(c => c.ProfissionalId);
 
-
+            builder.Property(c => c.EspecialidadeId).HasColumnName("id_especialidade").IsRequired();
+            builder.HasOne(c => c.Especialidade).WithMany(c => c.Consultas).HasForeignKey(c => c.EspecialidadeId);
         }
     }
 }

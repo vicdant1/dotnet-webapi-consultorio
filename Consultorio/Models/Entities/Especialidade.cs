@@ -4,7 +4,7 @@
     {
         public string Nome { get; set; } = string.Empty;
         public bool Ativa { get; set; }
+        public List<Consulta> Consultas { get; set; } = new();
         //public List<Profissional> Profissionais { get; set; }
-        //public List<Consulta> Consultas { get; set; }
     }
 }
