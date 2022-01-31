@@ -14,7 +14,7 @@ namespace Consultorio.Context.MappingFluentAPI
             base.Configure(builder);
 
             builder.Property(e => e.Nome).HasColumnName("nome").IsRequired();
-            builder.Property(e => e.Ativa).HasColumnName("ativa").HasDefaultValue(true);
+            builder.Property(e => e.Ativa).HasColumnName("ativa");
         }
     }
 }
