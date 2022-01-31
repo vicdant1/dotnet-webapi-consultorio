@@ -9,9 +9,10 @@
         public Paciente Paciente { get; set; } = new();
         public int PacienteId { get; set; }
 
+        public Profissional Profissional { get; set; } = new ();
+        public int ProfissionalId { get; set; }
+
         //public int EspecialidadeId { get; set; }
         //public Especialidade Especialidade { get; set; }
-        //public int ProfissionalId { get; set; }
-        //public Profissional Profissional { get; set; }
     }
 }
