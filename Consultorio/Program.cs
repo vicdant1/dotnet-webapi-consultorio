@@ -8,7 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCors();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    // ignoring circular loop
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; 
+});
 
 #region DbContext
 builder.Services.AddDbContext<ConsultorioContext>(opt => opt.UseSqlServer(
