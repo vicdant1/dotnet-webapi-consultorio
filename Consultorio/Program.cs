@@ -1,5 +1,7 @@
 
 using Consultorio.Context;
+using Consultorio.Repository;
+using Consultorio.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,9 @@ builder.Services.AddDbContext<ConsultorioContext>(opt => opt.UseSqlServer(
 
 #region Adding services/interfaces
 //builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddScoped<IBaseRepository, BaseRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
