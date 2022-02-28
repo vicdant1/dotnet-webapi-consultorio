@@ -33,4 +33,4 @@ Essa é uma pequena API que estou desenvolvendo para um consultório médico fic
 	</tbody>
 </table>
 
-Curso do Pablo: <a href="https://www.youtube.com/c/PabloCodess">Pablo Codes - DotNet Core</a>
+Curso do Pablo: <a href="https://www.youtube.com/c/PabloCodess">DotNet Core</a>
