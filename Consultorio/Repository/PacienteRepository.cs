@@ -1,4 +1,5 @@
 ﻿using Consultorio.Context;
+using Consultorio.Models.DTOs;
 using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +13,16 @@ namespace Consultorio.Repository
         {
             _consultorioContext = consultorioContext;
         }
+        public async Task<IEnumerable<PacienteDTO>> GetPacientesAsync()
+        {
+            return await _consultorioContext.Pacientes
+                .Select(p => new PacienteDTO { Id = p.Id, Nome = p.Nome }).ToListAsync();
+        }
 
         public async Task<Paciente> GetPacienteByIdAsync(int id)
         {
             return await _consultorioContext.Pacientes.Where(p => p.Id == id).Include(p => p.Consultas).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Paciente>> GetPacientesAsync()
-        {
-            return await _consultorioContext.Pacientes.Include(p => p.Consultas).ToListAsync();
-        }
     }
 }

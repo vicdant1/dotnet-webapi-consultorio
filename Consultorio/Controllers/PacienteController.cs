@@ -1,4 +1,6 @@
-﻿using Consultorio.Repository.Interfaces;
+﻿using Consultorio.Models.DTOs;
+using Consultorio.Models.Entities;
+using Consultorio.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Consultorio.Controllers
@@ -21,7 +23,6 @@ namespace Consultorio.Controllers
             return pacientes.Any()
                             ? Ok(pacientes) 
                             : BadRequest("Não foram encontrados pacientes");
-
         }
 
         [HttpGet]
@@ -31,12 +32,19 @@ namespace Consultorio.Controllers
         {
             var paciente = await _pacienteRepository.GetPacienteByIdAsync(id);
 
-            return paciente == null ? NotFound("Paciente não encontrado") : Ok(paciente);
+            var pacienteRetorno = new PacienteDetalhesDTO
+            {
+                Id = paciente.Id,
+                Nome = paciente.Nome,
+                Email = paciente.Email,
+                Celular = paciente.Celular,
+                //Cpf = paciente.Cpf,
+                //Consultas = paciente.Consultas
+                Consultas = new List<Consulta>()    
+            };
+
+            return pacienteRetorno == null ? NotFound("Paciente não encontrado") : Ok(pacienteRetorno);
         }
-
-
-
-
 
     }
 }
