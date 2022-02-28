@@ -13,15 +13,14 @@ namespace Consultorio.Repository
             _consultorioContext = consultorioContext;
         }
 
-        public Paciente GetPacienteById(int id)
+        public async Task<Paciente> GetPacienteByIdAsync(int id)
         {
-            throw new NotImplementedException();
-            //var paciente = _consultorioContext.Pacientes.Where(p => p.Id == id).ToList();
+            return await _consultorioContext.Pacientes.Where(p => p.Id == id).Include(p => p.Consultas).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Paciente> GetPacientes()
+        public async Task<IEnumerable<Paciente>> GetPacientesAsync()
         {
-            return _consultorioContext.Pacientes.Include(p => p.Consultas).ToList();
+            return await _consultorioContext.Pacientes.Include(p => p.Consultas).ToListAsync();
         }
     }
 }
