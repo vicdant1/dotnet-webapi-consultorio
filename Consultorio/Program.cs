@@ -27,7 +27,8 @@ builder.Services.AddDbContext<ConsultorioContext>(opt => opt.UseSqlServer(
 builder.Services.AddScoped<IBaseRepository, BaseRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
-builder.Services.AddAutoMapper(typeof(ConsultorioProfile));
+builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+builder.Services.AddAutoMapper(typeof(ConsultorioProfile), typeof(ProfissionalProfile), typeof(EspecialidadeProfile));
 #endregion
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

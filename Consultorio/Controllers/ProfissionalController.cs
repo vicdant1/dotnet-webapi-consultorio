@@ -1,4 +1,7 @@
-﻿using Consultorio.Repository.Interfaces;
+﻿using AutoMapper;
+using Consultorio.Models.DTOs;
+using Consultorio.Models.Entities;
+using Consultorio.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Consultorio.Controllers
@@ -8,9 +11,11 @@ namespace Consultorio.Controllers
     public class ProfissionalController : ControllerBase
     {
         IProfissionalRepository _profissionalRepository;
-        public ProfissionalController(IProfissionalRepository profissionalRepository)
+        IMapper _mapper;
+        public ProfissionalController(IProfissionalRepository profissionalRepository, IMapper mapper)
         {
             _profissionalRepository = profissionalRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,9 +31,61 @@ namespace Consultorio.Controllers
         {
             if (id <= 0) return BadRequest("Profissional inválido");
 
-            var profissional = https://www.youtube.com/watch?v=NMplO55WD4k&list=PLxd1RHU8YgYkHCbZqtqWuaYHASNERx-Tn&index=20 -> retomar 21:10s
+            var profissional = await _profissionalRepository.GetProfissionalByIdAsync(id);
 
-            return 
+            var profissionalRetorno = _mapper.Map<ProfissionalDetalhesDTO>(profissional);
+
+            return profissionalRetorno  != null ? 
+                Ok(profissionalRetorno) : 
+                NotFound("Profissional não encontrado");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(ProfissionalAdicionarDTO profissional)
+        {
+            if(profissional == null) return BadRequest("Profissional informado é inválido");
+
+            var profissionalAdicionar = _mapper.Map<Profissional>(profissional);
+
+            _profissionalRepository.Add(profissionalAdicionar);
+
+            return await _profissionalRepository.SaveChangesAsync() ? 
+                Ok(profissionalAdicionar) : 
+                BadRequest("Não foi possível adicionar o profissional");
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Put(int id, ProfissionalEditarDTO profissional)
+        {
+            if (id <= 0) return BadRequest("Profissional Inválido");
+
+            var profissionalEmBanco = await _profissionalRepository.GetProfissionalByIdAsync(id);
+
+            if (profissionalEmBanco == null) return BadRequest("Profissional não encontrado em banco");
+
+            var profissionalEditar = _mapper.Map(profissional, profissionalEmBanco);
+
+            _profissionalRepository.Update(profissionalEditar);
+
+            return await _profissionalRepository.SaveChangesAsync() ? Ok(profissionalEditar) : BadRequest("Não foi possível editar o profissional");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id <= 0) return BadRequest("Profissional Inválido");
+
+            var profissionalEmBanco = await _profissionalRepository.GetProfissionalByIdAsync(id);
+
+            if(profissionalEmBanco == null) return NotFound("Profissional não localizado em banco");
+
+            _profissionalRepository.Delete(profissionalEmBanco);
+
+            return await _profissionalRepository.SaveChangesAsync() ? 
+                Ok("Profissional deletado com suceesso") : 
+                BadRequest("Não foi possível deletar o paciente.");
+        }
+
     }
 }
