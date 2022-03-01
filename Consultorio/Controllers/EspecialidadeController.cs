@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Consultorio.Controllers
 {
-    retomar https://www.youtube.com/watch?v=vsVY6PpzDRY&list=PLxd1RHU8YgYkHCbZqtqWuaYHASNERx-Tn&index=22 do inicio
     [ApiController]
     [Route("api/[controller]")]
     public class EspecialidadeController : ControllerBase

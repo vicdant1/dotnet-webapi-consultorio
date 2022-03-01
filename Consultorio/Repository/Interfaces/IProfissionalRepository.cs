@@ -7,5 +7,6 @@ namespace Consultorio.Repository.Interfaces
     {
         Task<IEnumerable<ProfissionalDTO>> GetProfissionaisAsync();
         Task<Profissional> GetProfissionalByIdAsync(int id);
+        Task<ProfissionalEspecialidade> GetProfissionalEspecialidade(int idProfissional, int idEspecialidade);
     }
 }

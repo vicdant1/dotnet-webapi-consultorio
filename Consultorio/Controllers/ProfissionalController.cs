@@ -87,5 +87,45 @@ namespace Consultorio.Controllers
                 BadRequest("Não foi possível deletar o paciente.");
         }
 
+        [HttpPost]
+        [Route("adicionar-profissional-especialidade")]
+        public async Task<IActionResult> AdicionarProfissionalEspecialidade(ProfissionalEspecialidadeAdicionarDTO profissional)
+        {
+            int profissionalId = profissional.ProfissionalId;
+            int especialidadeId = profissional.EspecialidadeId;
+
+            if (profissionalId <= 0 || especialidadeId <= 0) return BadRequest("Dados inválidos");
+
+            var profissionalEspecialidade = await _profissionalRepository.GetProfissionalEspecialidade(profissionalId, especialidadeId);
+
+            if (profissionalEspecialidade != null) return Ok("Profissional já cadastrado na base de dados");
+
+            var profissionalEspecialidadeAdicionar = new ProfissionalEspecialidade
+            {
+                EspecialidadeId = especialidadeId,
+                ProfissionalId = profissionalId
+            };
+
+            _profissionalRepository.Add(profissionalEspecialidadeAdicionar);
+
+            return await _profissionalRepository.SaveChangesAsync() ? Ok("Especialidade adicionada") : BadRequest("Não foi possível adicionar a especialidade");
+        }
+
+        [HttpDelete("deletar-profissional-especialidade/{idProfissional}/{idEspecialidade}")]
+        public async Task<IActionResult> DeleteProfissionalEspecialidade(int idProfissional, int idEspecialidade)
+        {
+            if (idProfissional <= 0 || idEspecialidade <= 0) return BadRequest("Dados inválidos");
+
+            var profissionalEspecialidade = await _profissionalRepository.GetProfissionalEspecialidade(idProfissional, idEspecialidade);
+
+            if (profissionalEspecialidade == null) return BadRequest("Especialidade não cadastrada");
+
+            _profissionalRepository.Delete(profissionalEspecialidade);
+
+            return await _profissionalRepository.SaveChangesAsync() ? 
+                Ok("Especialidade deletada do profissional") : 
+                BadRequest("Não foi possível deletar a especialidade do profissional");
+        }
+
     }
 }
