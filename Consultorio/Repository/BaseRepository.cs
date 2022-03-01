@@ -13,22 +13,22 @@ namespace Consultorio.Repository
 
         public void Add<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _consultorioContext.Add(entity);
         }
 
         public void Delete<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _consultorioContext.Remove(entity);
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return await _consultorioContext.SaveChangesAsync() > 0;
         }
 
         public void Update<T>(T entity) where T : class
         {
-            throw new NotImplementedException();
+            _consultorioContext.Update(entity);
         }
     }
 }

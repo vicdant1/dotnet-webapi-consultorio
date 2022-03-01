@@ -21,7 +21,11 @@ namespace Consultorio.Repository
 
         public async Task<Paciente> GetPacienteByIdAsync(int id)
         {
-            return await _consultorioContext.Pacientes.Where(p => p.Id == id).Include(p => p.Consultas).FirstOrDefaultAsync();
+            return await _consultorioContext.Pacientes.Where(p => p.Id == id)
+                .Include(p => p.Consultas)
+                .ThenInclude(e => e.Especialidade)
+                .ThenInclude(p => p.Profissionais)
+                .FirstOrDefaultAsync();
         }
 
     }

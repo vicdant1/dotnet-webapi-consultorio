@@ -5,10 +5,10 @@ namespace Consultorio.Models.DTOs
     public class PacienteDetalhesDTO
     {
         public int Id { get; set; }
-        public string Nome { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Celular { get; set; } = string.Empty;
-        public string Cpf { get; set; } = string.Empty;
-        public List<Consulta> Consultas { get; set; } = new();
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Celular { get; set; }
+        public string Cpf { get; set; }
+        public List<ConsultaDTO> Consultas { get; set; }
     }
 }
