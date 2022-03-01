@@ -26,6 +26,7 @@ builder.Services.AddDbContext<ConsultorioContext>(opt => opt.UseSqlServer(
 
 builder.Services.AddScoped<IBaseRepository, BaseRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
 builder.Services.AddAutoMapper(typeof(ConsultorioProfile));
 #endregion
 

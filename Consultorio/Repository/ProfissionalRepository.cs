@@ -1,6 +1,8 @@
 ﻿using Consultorio.Context;
 using Consultorio.Models.DTOs;
+using Consultorio.Models.Entities;
 using Consultorio.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Consultorio.Repository
 {
@@ -12,14 +14,23 @@ namespace Consultorio.Repository
             _consultorioContext = consultorioContext;
         }
 
-        public Task<IEnumerable<ProfissionalDTO>> GetProfissionaisAsync()
+        public async Task<IEnumerable<ProfissionalDTO>> GetProfissionaisAsync()
         {
-            throw new NotImplementedException();
+            return await _consultorioContext.Profissionais.Select(x => new ProfissionalDTO
+            {
+                Id = x.Id,
+                Nome = x.Nome,
+                Ativo = x.Ativo
+            }).ToListAsync();
         }
 
-        public Task<ProfissionalDTO> GetProfissionalByIdAsync()
+        public async Task<Profissional> GetProfissionalByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _consultorioContext.Profissionais
+                .Include(p => p.Especialidades)
+                .Include(p => p.Consultas)
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }
