@@ -16,6 +16,8 @@ namespace Consultorio.Helpers
             CreateMap<PacienteAdicionarDTO, Paciente>();
             CreateMap<PacienteEditarDTO, Paciente>()
                 .ForAllMembers(o => o.Condition((source, destination, member) => member != null));
+
+            CreateMap<Paciente, PacienteDTO>();
         }
     }
 }

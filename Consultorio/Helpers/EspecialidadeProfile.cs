@@ -10,6 +10,8 @@ namespace Consultorio.Helpers
         {
             CreateMap<Especialidade, EspecialidadeDetalhesDTO>()
                 .ForMember(dest => dest.TotalConsultas, opt => opt.MapFrom(src => src.Consultas.Count()));
+
+            CreateMap<Especialidade, EspecialidadeDTO>();
         }
     }
 }
